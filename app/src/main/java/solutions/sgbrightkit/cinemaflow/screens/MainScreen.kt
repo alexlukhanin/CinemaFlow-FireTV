@@ -28,6 +28,7 @@ import solutions.sgbrightkit.cinemaflow.Movie
 import solutions.sgbrightkit.cinemaflow.MovieList
 import solutions.sgbrightkit.cinemaflow.R
 import androidx.navigation.NavHostController
+import solutions.sgbrightkit.cinemaflow.Screen
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
@@ -58,7 +59,8 @@ fun MainScreen(navController: NavHostController) {
                     val (categoryName, movies) = MovieList.categories[index]
                     MovieCategory(
                         categoryName = categoryName,
-                        movies = movies
+                        movies = movies,
+                        navController = navController
                     )
                 }
             }
@@ -69,7 +71,8 @@ fun MainScreen(navController: NavHostController) {
 @Composable
 fun MovieCategory(
     categoryName: String,
-    movies: List<Movie>
+    movies: List<Movie>,
+    navController: NavHostController
 ) {
     Column {
         Text(
@@ -86,7 +89,7 @@ fun MovieCategory(
                 MovieCard(
                     movie = movies[index],
                     onClick = {
-                        // We'll handle clicks later
+                        navController.navigate(Screen.Details.createRoute(movies[index].id))
                     }
                 )
             }
