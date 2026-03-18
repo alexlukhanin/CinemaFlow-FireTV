@@ -1,4 +1,4 @@
-package solutions.sgbrightkit.cinemaflow
+package solutions.sgbrightkit.cinemaflow.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,10 +24,14 @@ import androidx.tv.material3.Text
 import coil.compose.AsyncImage
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
+import solutions.sgbrightkit.cinemaflow.Movie
+import solutions.sgbrightkit.cinemaflow.MovieList
+import solutions.sgbrightkit.cinemaflow.R
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()

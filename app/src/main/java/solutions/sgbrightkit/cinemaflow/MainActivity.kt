@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Surface
+import solutions.sgbrightkit.cinemaflow.screens.MainScreen
 import solutions.sgbrightkit.cinemaflow.ui.theme.CinemaFlowTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,9 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CinemaFlowTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    MainScreen()
-                }
+                CinemaFlowNavGraph()
             }
         }
     }
