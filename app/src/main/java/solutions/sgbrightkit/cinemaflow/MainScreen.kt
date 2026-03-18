@@ -27,8 +27,10 @@ import androidx.compose.ui.graphics.Color
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
@@ -36,8 +38,9 @@ fun MainScreen() {
                 .padding(48.dp, 40.dp)
         ) {
             Text(
-                text = "\uD83C\uDFAC CinemaFlow",
+                text = "🎬 CinemaFlow",
                 style = MaterialTheme.typography.displaySmall,
+                color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 20.dp)
             )
 
