@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 // CinemaFlow Brand Colors
 val BrandBackground = Color(0xFFf6f0ee)
 val BrandText = Color(0xFF5037d0)
-val BrandPrimary = Color(0xFF0aa1b2)
+val BrandPrimary = Color(0xFF121021)
 val BrandSecondary = Color(0xFF0e2941)
 
 // UI Colors
