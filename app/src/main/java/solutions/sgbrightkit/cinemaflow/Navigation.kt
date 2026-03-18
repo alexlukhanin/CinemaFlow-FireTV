@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import solutions.sgbrightkit.cinemaflow.screens.DetailsScreen
-import solutions.sgbrightkit.cinemaflow.screens.MainScreen
+import solutions.sgbrightkit.cinemaflow.screens.MainMenuScreen
 import solutions.sgbrightkit.cinemaflow.screens.SearchScreen
 import solutions.sgbrightkit.cinemaflow.screens.SettingsScreen
 
@@ -29,7 +29,7 @@ fun CinemaFlowNavGraph(
         startDestination = Screen.Main.route
     ) {
         composable(Screen.Main.route) {
-            MainScreen(navController = navController)
+            MainMenuScreen(navController = navController)
         }
 
         composable(Screen.Search.route) {
