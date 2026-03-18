@@ -1,10 +1,12 @@
 package solutions.sgbrightkit.cinemaflow
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -13,32 +15,35 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.Card
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
-import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 import coil.compose.AsyncImage
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun MainScreen() {
-    Surface(
-        modifier = Modifier.fillMaxSize()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(48.dp, 40.dp)
+                .padding(48.dp, 20.dp)
         ) {
-            Text(
-                text = "\uD83C\uDFAC CinemaFlow",
-                style = MaterialTheme.typography.displaySmall,
-                modifier = Modifier.padding(bottom = 20.dp)
+            Image(
+                painter = painterResource(id = R.drawable.main_logo),
+                contentDescription = "CinemaFlow Logo",
+                modifier = Modifier
+                    .height(75.dp)
+                    .padding(bottom = 20.dp)
             )
 
             LazyColumn(
