@@ -12,6 +12,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.tv.material3.*
 import solutions.sgbrightkit.cinemaflow.R
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.compose.ui.window.Dialog
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
@@ -21,6 +27,13 @@ fun MainMenuScreen(
     ) {
     var selectedMenuItem by remember { mutableStateOf(0) }
     var isMenuFocused by remember { mutableStateOf(false) }
+    var showExitDialog by remember { mutableStateOf(false) }
+    val activity = LocalContext.current as? ComponentActivity
+
+    // Handle back press
+    BackHandler {
+        showExitDialog = true
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -83,6 +96,62 @@ fun MainMenuScreen(
                 .padding(16.dp)
                 .align(Alignment.TopStart)
         )
+    }
+    // Exit Dialog
+    if (showExitDialog) {
+        ExitDialog(
+            onStay = { showExitDialog = false },
+            onExit = { activity?.finish() }
+        )
+    }
+}
+
+@OptIn(ExperimentalTvMaterial3Api::class)
+@Composable
+fun ExitDialog(onStay: () -> Unit, onExit: () -> Unit) {
+    androidx.compose.ui.window.Dialog(onDismissRequest = onStay) {
+        Surface(
+            modifier = Modifier
+                .width(400.dp)
+                .padding(24.dp),
+            shape = androidx.compose.foundation.shape.RoundedCornerShape(16.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(32.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Exit CinemaFlow?",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                Text(
+                    text = "Are you sure you want to exit?",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Button(
+                        onClick = onStay,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Stay")
+                    }
+
+                    Button(
+                        onClick = onExit,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Text("Exit")
+                    }
+                }
+            }
+        }
     }
 }
 
