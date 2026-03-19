@@ -41,16 +41,8 @@ fun MainScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(48.dp, 20.dp)
+                .padding(24.dp, 20.dp)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.main_logo),
-                contentDescription = "CinemaFlow Logo",
-                modifier = Modifier
-                    .height(75.dp)
-                    .padding(bottom = 20.dp)
-            )
-
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
                 contentPadding = PaddingValues(bottom = 40.dp)
