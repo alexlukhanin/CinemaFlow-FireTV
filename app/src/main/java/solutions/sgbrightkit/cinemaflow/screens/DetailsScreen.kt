@@ -16,6 +16,9 @@ import solutions.sgbrightkit.cinemaflow.BuildConfig
 import solutions.sgbrightkit.cinemaflow.Movie
 import solutions.sgbrightkit.cinemaflow.data.RetrofitInstance
 import solutions.sgbrightkit.cinemaflow.data.model.toMovie
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
+import solutions.sgbrightkit.cinemaflow.PlayerActivity
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
@@ -142,13 +145,23 @@ fun DetailsScreen(navController: NavHostController, movieId: Long?) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // Play button
+                // Play button
+                val context = LocalContext.current
+
                 Button(
                     onClick = {
-                        // TODO: Launch video player
+                        currentMovie.trailerKey?.let { trailerKey ->
+                            // YouTube video URL
+                            val videoUrl = "https://www.youtube.com/watch?v=$trailerKey"
+                            val intent = Intent(context, PlayerActivity::class.java).apply {
+                                putExtra("VIDEO_URL", videoUrl)
+                            }
+                            context.startActivity(intent)
+                        }
                     },
                     modifier = Modifier.width(200.dp)
                 ) {
-                    Text("▶ Play Movie")
+                    Text(if (currentMovie.trailerKey != null) "▶ Play Trailer" else "▶ No Trailer")
                 }
 
                 Spacer(modifier = Modifier.height(24.dp))
