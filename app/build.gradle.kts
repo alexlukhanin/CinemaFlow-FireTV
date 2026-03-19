@@ -19,7 +19,7 @@ android {
         minSdk = 23
         targetSdk = 36
         versionCode = 1
-        versionName = "1.1.4"
+        versionName = "1.1.5"
 
         // Read API key
         val secretsFile = rootProject.file("secrets.properties")
