@@ -10,5 +10,6 @@ data class Movie(
     val releaseYear: String = "2024",
     val rating: Double = 7.5,
     val duration: String = "120 min",
-    val genres: List<String> = listOf("Action", "Drama")
+    val genres: List<String> = listOf("Action", "Drama"),
+    val trailerKey: String? = null  // ADD THIS LINE
 )
