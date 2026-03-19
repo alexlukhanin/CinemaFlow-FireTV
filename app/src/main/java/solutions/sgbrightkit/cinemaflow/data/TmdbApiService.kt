@@ -3,6 +3,8 @@ package solutions.sgbrightkit.cinemaflow.data
 import retrofit2.http.GET
 import retrofit2.http.Query
 import solutions.sgbrightkit.cinemaflow.data.model.TmdbMovieResponse
+import retrofit2.http.Path
+import solutions.sgbrightkit.cinemaflow.data.model.TmdbMovieDetails
 
 interface TmdbApiService {
 
@@ -30,4 +32,11 @@ interface TmdbApiService {
         @Query("query") query: String,
         @Query("page") page: Int = 1
     ): TmdbMovieResponse
+
+    @GET("movie/{movie_id}")
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieId: Long,
+        @Query("api_key") apiKey: String,
+        @Query("append_to_response") appendToResponse: String = "videos"
+    ): TmdbMovieDetails
 }
