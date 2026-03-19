@@ -12,7 +12,10 @@ import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun SettingsScreen(
+    navController: NavHostController,
+    onThemeToggle: () -> Unit = {}
+    ) {
     var isDarkTheme by remember { mutableStateOf(false) }
 
     Column(
@@ -33,7 +36,10 @@ fun SettingsScreen(navController: NavHostController) {
         SettingItem(
             title = "Theme",
             description = if (isDarkTheme) "Dark Mode" else "Light Mode",
-            onClick = { isDarkTheme = !isDarkTheme }
+            onClick = {
+                isDarkTheme = !isDarkTheme
+                onThemeToggle()
+            }
         )
 
         // Version info

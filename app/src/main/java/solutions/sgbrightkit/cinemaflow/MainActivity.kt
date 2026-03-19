@@ -3,21 +3,19 @@ package solutions.sgbrightkit.cinemaflow
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.tv.material3.ExperimentalTvMaterial3Api
-import androidx.tv.material3.Surface
-import solutions.sgbrightkit.cinemaflow.screens.MainScreen
+import androidx.compose.runtime.*
 import solutions.sgbrightkit.cinemaflow.ui.theme.CinemaFlowTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalTvMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CinemaFlowTheme {
-                CinemaFlowNavGraph()
+            var isDarkTheme by remember { mutableStateOf(false) }
+
+            CinemaFlowTheme(useDarkTheme = isDarkTheme) {
+                CinemaFlowNavGraph(
+                    onThemeToggle = { isDarkTheme = !isDarkTheme }
+                )
             }
         }
     }

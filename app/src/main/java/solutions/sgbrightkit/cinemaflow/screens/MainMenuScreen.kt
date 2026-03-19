@@ -15,7 +15,10 @@ import solutions.sgbrightkit.cinemaflow.R
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun MainMenuScreen(navController: NavHostController) {
+fun MainMenuScreen(
+    navController: NavHostController,
+    onThemeToggle: () -> Unit = {}
+    ) {
     var selectedMenuItem by remember { mutableStateOf(0) }
     var isMenuFocused by remember { mutableStateOf(false) }
 
@@ -66,7 +69,7 @@ fun MainMenuScreen(navController: NavHostController) {
                 when (selectedMenuItem) {
                     0 -> MainScreen(navController)
                     1 -> SearchScreen(navController)
-                    2 -> SettingsScreen(navController)
+                    2 -> SettingsScreen(navController, onThemeToggle)
                 }
             }
         }

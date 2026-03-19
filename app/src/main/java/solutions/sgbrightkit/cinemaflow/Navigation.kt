@@ -22,14 +22,18 @@ sealed class Screen(val route: String) {
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun CinemaFlowNavGraph(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    onThemeToggle: () -> Unit = {}
 ) {
     NavHost(
         navController = navController,
         startDestination = Screen.Main.route
     ) {
         composable(Screen.Main.route) {
-            MainMenuScreen(navController = navController)
+            MainMenuScreen(
+                navController = navController,
+                onThemeToggle = onThemeToggle
+            )
         }
 
         composable(Screen.Search.route) {
