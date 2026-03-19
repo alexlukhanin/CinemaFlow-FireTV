@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 
@@ -20,10 +21,8 @@ class PlayerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val videoUrl = intent.getStringExtra("VIDEO_URL") ?: ""
-
         setContent {
-            VideoPlayerScreen(videoUrl = videoUrl)
+            VideoPlayerScreen()
         }
     }
 
@@ -34,8 +33,19 @@ class PlayerActivity : ComponentActivity() {
 }
 
 @Composable
-fun VideoPlayerScreen(videoUrl: String) {
+fun VideoPlayerScreen() {
     val context = LocalContext.current
+
+    // Free sample videos
+    val sampleVideos = listOf(
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+    )
+
+    // Pick random video
+    val videoUrl = remember { sampleVideos.random() }
 
     val exoPlayer = remember {
         ExoPlayer.Builder(context).build().apply {
@@ -43,6 +53,7 @@ fun VideoPlayerScreen(videoUrl: String) {
             setMediaItem(mediaItem)
             prepare()
             playWhenReady = true
+            repeatMode = Player.REPEAT_MODE_OFF
         }
     }
 
@@ -62,6 +73,7 @@ fun VideoPlayerScreen(videoUrl: String) {
                 PlayerView(ctx).apply {
                     player = exoPlayer
                     useController = true
+                    controllerShowTimeoutMs = 5000
                 }
             },
             modifier = Modifier.fillMaxSize()
