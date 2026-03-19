@@ -84,7 +84,10 @@ fun SearchScreen(navController: NavHostController) {
 
         // Show results or popular
         if (isSearching) {
-            Text("Searching...")
+            Text(
+                text = "Searching...",
+                color = MaterialTheme.colorScheme.onBackground
+                )
         } else if (searchQuery.isNotEmpty()) {
             Text(
                 text = "Results for \"$searchQuery\" (${searchResults.size})",
