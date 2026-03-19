@@ -23,6 +23,11 @@ fun TmdbMovie.toMovie(): Movie {
 fun TmdbMovieDetails.toMovie(): Movie {
     val imageBaseUrl = "https://image.tmdb.org/t/p/"
 
+    // Find YouTube trailer
+    val trailer = videos?.results?.firstOrNull {
+        it.site == "YouTube" && it.type == "Trailer"
+    }
+
     return Movie(
         id = this.id,
         title = this.title,
@@ -33,6 +38,7 @@ fun TmdbMovieDetails.toMovie(): Movie {
         releaseYear = releaseDate?.take(4) ?: "Unknown",
         rating = voteAverage,
         duration = "${runtime ?: 0} min",
-        genres = genres.map { it.name }
+        genres = genres.map { it.name },
+        trailerKey = trailer?.key  // ADD THIS LINE
     )
 }
