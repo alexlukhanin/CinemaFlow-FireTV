@@ -1,11 +1,15 @@
 [versions]
 agp = "9.1.0"
 coilCompose = "2.7.0"
+converterGson = "3.0.0"
 coreKtx = "1.10.1"
 appcompat = "1.6.1"
 kotlin = "2.2.10"
 composeBom = "2024.09.00"
+kotlinxCoroutinesAndroid = "1.10.2"
+loggingInterceptor = "5.3.2"
 navigationCompose = "2.9.7"
+retrofit = "3.0.0"
 tvFoundation = "1.0.0-alpha07"
 tvMaterial = "1.0.0-alpha07"
 lifecycleRuntimeKtx = "2.6.1"
@@ -27,6 +31,10 @@ androidx-tv-material = { group = "androidx.tv", name = "tv-material", version.re
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
