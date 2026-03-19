@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -18,6 +21,13 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        // Read API key
+        val secretsFile = rootProject.file("secrets.properties")
+        val secrets = Properties()
+        if (secretsFile.exists()) {
+            FileInputStream(secretsFile).use { secrets.load(it) }
+        }
+        buildConfigField("String", "TMDB_API_KEY", "\"${secrets.getProperty("TMDB_API_KEY") ?: ""}\"")
     }
 
     buildTypes {
@@ -35,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -56,4 +67,11 @@ dependencies {
     implementation(libs.coil.compose)
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
+    // Retrofit for API calls
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+// Coroutines (if not already there)
+    implementation(libs.kotlinx.coroutines.android)
 }
