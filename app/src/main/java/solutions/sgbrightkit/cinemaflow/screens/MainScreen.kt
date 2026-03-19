@@ -75,7 +75,10 @@ fun MainScreen(navController: NavHostController) {
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text("Loading movies...")
+                Text(
+                    text = "Loading movies...",
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
         } else {
             LazyColumn(
@@ -116,6 +119,7 @@ fun MainScreen(navController: NavHostController) {
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun MovieCategory(
     categoryName: String,
@@ -126,6 +130,7 @@ fun MovieCategory(
         Text(
             text = categoryName,
             style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 

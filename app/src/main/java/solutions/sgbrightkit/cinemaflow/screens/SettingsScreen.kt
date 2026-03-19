@@ -9,11 +9,18 @@ import androidx.navigation.NavHostController
 import androidx.tv.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
+import solutions.sgbrightkit.cinemaflow.PreferencesManager
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavHostController) {
-    var isDarkTheme by remember { mutableStateOf(false) }
+fun SettingsScreen(
+    navController: NavHostController,
+    onThemeToggle: () -> Unit = {}
+    ) {
+    val context = LocalContext.current
+    var isDarkTheme by remember {
+        mutableStateOf(PreferencesManager.isDarkTheme(context))
+    }
 
     Column(
         modifier = Modifier
@@ -33,7 +40,10 @@ fun SettingsScreen(navController: NavHostController) {
         SettingItem(
             title = "Theme",
             description = if (isDarkTheme) "Dark Mode" else "Light Mode",
-            onClick = { isDarkTheme = !isDarkTheme }
+            onClick = {
+                isDarkTheme = !isDarkTheme
+                onThemeToggle()
+            }
         )
 
         // Version info
