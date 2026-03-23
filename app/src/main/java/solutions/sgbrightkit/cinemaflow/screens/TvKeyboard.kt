@@ -24,11 +24,11 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 
 private val KEY_ROWS = listOf(
+    listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "⌫"),
     listOf("Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"),
-    listOf("A", "S", "D", "F", "G", "H", "J", "K", "L"),
+    listOf("A", "S", "D", "F", "G", "H", "J", "K", "L", "SEARCH" ),
     listOf("Z", "X", "C", "V", "B", "N", "M"),
-    listOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "0"),
-    listOf("SPACE", "⌫", "SEARCH")
+    listOf("SPACE")
 )
 
 /**
@@ -106,9 +106,8 @@ private fun KeyButton(
             .height(42.dp),
         colors = ButtonDefaults.colors(
             containerColor = when {
-                isAction  -> MaterialTheme.colorScheme.primary
-                isSpecial -> MaterialTheme.colorScheme.secondary
-                else      -> MaterialTheme.colorScheme.primaryContainer
+                isAction || isSpecial -> MaterialTheme.colorScheme.secondary
+                else                  -> MaterialTheme.colorScheme.primaryContainer
             },
             focusedContainerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
