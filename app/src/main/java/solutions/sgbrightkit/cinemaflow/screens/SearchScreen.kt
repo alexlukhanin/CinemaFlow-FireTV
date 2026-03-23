@@ -39,11 +39,14 @@ import solutions.sgbrightkit.cinemaflow.data.model.toMovie
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun SearchScreen(navController: NavHostController) {
-    // Pending query being typed in the keyboard popup
+fun SearchScreen(
+    navController: NavHostController,
+    restoredQuery: String = "",
+    onQueryCommitted: (String) -> Unit = {}
+) {
     var pendingQuery by remember { mutableStateOf("") }
-    // Committed query that triggered the last search
-    var searchQuery by remember { mutableStateOf("") }
+    // Init searchQuery from the caller so returning from Details restores the last search
+    var searchQuery by remember { mutableStateOf(restoredQuery) }
     var searchResults by remember { mutableStateOf<List<Movie>>(emptyList()) }
     var popularMovies by remember { mutableStateOf<List<Movie>>(emptyList()) }
     var isSearching by remember { mutableStateOf(false) }
@@ -57,6 +60,23 @@ fun SearchScreen(navController: NavHostController) {
             popularMovies = response.results.map { it.toMovie() }
         } catch (e: Exception) {
             println("Popular movies error: ${e.message}")
+        }
+    }
+
+    // Re-fetch results when returning from Details with an existing query
+    LaunchedEffect(searchQuery) {
+        if (searchQuery.isNotEmpty() && searchResults.isEmpty()) {
+            isSearching = true
+            try {
+                val response = RetrofitInstance.api.searchMovies(
+                    apiKey = BuildConfig.TMDB_API_KEY,
+                    query = searchQuery
+                )
+                searchResults = response.results.map { it.toMovie() }
+            } catch (e: Exception) {
+                println("Search restore error: ${e.message}")
+            }
+            isSearching = false
         }
     }
 
@@ -108,6 +128,7 @@ fun SearchScreen(navController: NavHostController) {
                             if (query.isNotEmpty()) {
                                 keyboardVisible = false
                                 searchQuery = query
+                                onQueryCommitted(query)   // persist in parent
                                 scope.launch {
                                     isSearching = true
                                     try {
