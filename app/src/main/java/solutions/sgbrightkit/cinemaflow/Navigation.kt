@@ -29,10 +29,11 @@ fun CinemaFlowNavGraph(
         navController = navController,
         startDestination = Screen.Main.route
     ) {
-        composable(Screen.Main.route) {
+        composable(Screen.Main.route) { backStackEntry ->
             MainMenuScreen(
                 navController = navController,
-                onThemeToggle = onThemeToggle
+                onThemeToggle = onThemeToggle,
+                backStackEntry = backStackEntry
             )
         }
 
