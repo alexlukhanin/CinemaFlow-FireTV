@@ -31,6 +31,9 @@ fun MainMenuScreen(
     var selectedMenuItem by remember {
         mutableStateOf(savedState?.get<Int>("selectedMenuItem") ?: 0)
     }
+    var lastSearchQuery by remember {
+        mutableStateOf(savedState?.get<String>("searchQuery") ?: "")
+    }
     var isMenuFocused by remember { mutableStateOf(false) }
     var showExitDialog by remember { mutableStateOf(false) }
     val activity = LocalContext.current as? ComponentActivity
@@ -95,7 +98,14 @@ fun MainMenuScreen(
             ) {
                 when (selectedMenuItem) {
                     0 -> MainScreen(navController)
-                    1 -> SearchScreen(navController)
+                    1 -> SearchScreen(
+                        navController = navController,
+                        restoredQuery = lastSearchQuery,
+                        onQueryCommitted = { query ->
+                            lastSearchQuery = query
+                            savedState?.set("searchQuery", query)
+                        }
+                    )
                     2 -> SettingsScreen(navController, onThemeToggle)
                 }
             }
