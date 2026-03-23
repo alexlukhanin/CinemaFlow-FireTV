@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -149,19 +150,24 @@ fun SearchScreen(navController: NavHostController) {
                 keyboardVisible = true
             },
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth(0.9f)
                 .height(70.dp)
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = if (searchQuery.isEmpty()) "🔍  Press OK to search…" else "🔍  $searchQuery",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Text(text = "⌨", style = MaterialTheme.typography.headlineMedium)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (searchQuery.isEmpty()) "🔍  Press OK to search…" else "🔍  $searchQuery",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Text(text = "⌨", style = MaterialTheme.typography.headlineMedium)
+                }
             }
         }
 

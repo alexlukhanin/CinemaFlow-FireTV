@@ -51,10 +51,11 @@ fun TvKeyboard(
                 color = MaterialTheme.colorScheme.surface,
                 shape = RoundedCornerShape(12.dp)
             )
-            .padding(vertical = 10.dp, horizontal = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(3.dp)
+            .padding(vertical = 6.dp, horizontal = 6.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
-        KEY_ROWS.forEach { row ->
+        KEY_ROWS.forEachIndexed { rowIndex, row ->
+            val isBottomRow = rowIndex == KEY_ROWS.lastIndex
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
@@ -71,6 +72,7 @@ fun TvKeyboard(
                         },
                         isAction = key == "SEARCH",
                         isSpecial = key == "⌫" || key == "SPACE",
+                        extraHorizontalPadding = if (isBottomRow) 10.dp else 3.dp,
                         onClick = {
                             when (key) {
                                 "SEARCH" -> onSearch()
@@ -93,14 +95,15 @@ private fun KeyButton(
     width: Dp,
     isAction: Boolean,
     isSpecial: Boolean,
+    extraHorizontalPadding: Dp = 3.dp,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         modifier = Modifier
-            .padding(3.dp)
+            .padding(vertical = 2.dp, horizontal = extraHorizontalPadding)
             .width(width)
-            .height(70.dp),
+            .height(42.dp),
         colors = ButtonDefaults.colors(
             containerColor = when {
                 isAction  -> MaterialTheme.colorScheme.primary
