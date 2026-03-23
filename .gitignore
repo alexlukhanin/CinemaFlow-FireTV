@@ -95,3 +95,5 @@ lint/tmp/
 # Miscellaneous
 *.kotlin_module
 /secrets.properties
+./vscode
+./antigravity
